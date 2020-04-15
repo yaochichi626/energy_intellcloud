@@ -3,7 +3,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intellcloud/dao/login_dao.dart';
 import 'package:intellcloud/model/login_model.dart';
 import 'package:intellcloud/utils/Urls.dart';
-import 'package:intellcloud/widget/loading_container.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
@@ -21,119 +20,116 @@ class _LoginPageState extends State<LoginPage> {
     _context = context;
     final double topPadding = MediaQuery.of(context).padding.top;
     return Scaffold(
-      body: LoadingContainer(
-        isLoading: false,
-        child: Container(
-          padding: EdgeInsets.only(top: topPadding, left: 50.0, right: 50.0),
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("images/bg_login.png"),
-                fit: BoxFit.cover,
-              )),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Expanded(
-                child: Center(
-                  child: Text(
-                    "国家电网",
-                    style: TextStyle(fontSize: 30, color: Colors.white),
-                  ),
+      body: Container(
+        padding: EdgeInsets.only(top: topPadding, left: 50.0, right: 50.0),
+        decoration: BoxDecoration(
+            image: DecorationImage(
+          image: AssetImage("images/bg_login.png"),
+          fit: BoxFit.cover,
+        )),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Expanded(
+              child: Center(
+                child: Text(
+                  "能源智云",
+                  style: TextStyle(fontSize: 30, color: Colors.white),
                 ),
-                flex: 1,
               ),
-              Expanded(
-                flex: 2,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.only(left: 10.0),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                            color: Colors.greenAccent,
-                            width: 1.0,
-                            style: BorderStyle.solid),
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Row(
-                        children: <Widget>[
-                          ImageIcon(
-                            AssetImage("images/user.png"),
-                          ),
-                          Expanded(
-                            child: TextField(
-                                controller: _usernameController,
-                                decoration: InputDecoration(
-                                  //输入内容距离上下左右的距离 ，可通过这个属性来控制 TextField的高度
-                                    contentPadding: EdgeInsets.all(10.0),
-                                    hintText: '请输入用户名',
-                                    //默认的文字placeholder 占位文字
-                                    // border:InputBorder.none,  去掉那条线
-                                    disabledBorder: InputBorder.none,
-                                    enabledBorder: InputBorder.none,
-                                    focusedBorder: InputBorder.none)),
-                          ),
-                        ],
-                      ),
+              flex: 1,
+            ),
+            Expanded(
+              flex: 2,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(left: 10.0),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Colors.greenAccent,
+                          width: 1.0,
+                          style: BorderStyle.solid),
+                      borderRadius: BorderRadius.circular(20.0),
                     ),
-                    Container(
-                      margin: EdgeInsets.only(top: 20.0),
-                      padding: EdgeInsets.only(left: 10.0),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                            color: Colors.greenAccent,
-                            width: 1.0,
-                            style: BorderStyle.solid),
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Row(
-                        children: <Widget>[
-                          ImageIcon(
-                            AssetImage("images/password.png"),
-                          ),
-                          Expanded(
-                            child: TextField(
-                                controller: _passwordController,
-                                obscureText: true,
-                                decoration: InputDecoration(
-                                  //输入内容距离上下左右的距离 ，可通过这个属性来控制 TextField的高度
-                                    contentPadding: EdgeInsets.all(10.0),
-                                    hintText: '请输入密码',
-                                    //默认的文字placeholder 占位文字
-                                    // border:InputBorder.none,  去掉那条线
-                                    disabledBorder: InputBorder.none,
-                                    enabledBorder: InputBorder.none,
-                                    focusedBorder: InputBorder.none)),
-                          ),
-                        ],
-                      ),
-                    ),
-                    FractionallySizedBox(
-                      widthFactor: 1,
-                      child: Container(
-                        margin: EdgeInsets.only(top: 17.0),
-                        height: 45.0,
-                        child: RaisedButton(
-                          color: Colors.teal,
-                          splashColor: Colors.tealAccent,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                          child: Text(
-                            "登录",
-                            style: TextStyle(fontSize: 16, color: Colors.white),
-                          ),
-                          onPressed: _dologin,
+                    child: Row(
+                      children: <Widget>[
+                        ImageIcon(
+                          AssetImage("images/user.png"),
                         ),
+                        Expanded(
+                          child: TextField(
+                              controller: _usernameController,
+                              decoration: InputDecoration(
+                                  //输入内容距离上下左右的距离 ，可通过这个属性来控制 TextField的高度
+                                  contentPadding: EdgeInsets.all(10.0),
+                                  hintText: '请输入用户名',
+                                  //默认的文字placeholder 占位文字
+                                  // border:InputBorder.none,  去掉那条线
+                                  disabledBorder: InputBorder.none,
+                                  enabledBorder: InputBorder.none,
+                                  focusedBorder: InputBorder.none)),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 20.0),
+                    padding: EdgeInsets.only(left: 10.0),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Colors.greenAccent,
+                          width: 1.0,
+                          style: BorderStyle.solid),
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Row(
+                      children: <Widget>[
+                        ImageIcon(
+                          AssetImage("images/password.png"),
+                        ),
+                        Expanded(
+                          child: TextField(
+                              controller: _passwordController,
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                  //输入内容距离上下左右的距离 ，可通过这个属性来控制 TextField的高度
+                                  contentPadding: EdgeInsets.all(10.0),
+                                  hintText: '请输入密码',
+                                  //默认的文字placeholder 占位文字
+                                  // border:InputBorder.none,  去掉那条线
+                                  disabledBorder: InputBorder.none,
+                                  enabledBorder: InputBorder.none,
+                                  focusedBorder: InputBorder.none)),
+                        ),
+                      ],
+                    ),
+                  ),
+                  FractionallySizedBox(
+                    widthFactor: 1,
+                    child: Container(
+                      margin: EdgeInsets.only(top: 17.0),
+                      height: 45.0,
+                      child: RaisedButton(
+                        color: Colors.teal,
+                        splashColor: Colors.tealAccent,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        child: Text(
+                          "登录",
+                          style: TextStyle(fontSize: 16, color: Colors.white),
+                        ),
+                        onPressed: _dologin,
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
